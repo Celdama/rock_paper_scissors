@@ -31,6 +31,18 @@ function playRound (playerSelection, computerSelection) {
   return result
 }
 
+function displayWinnerMessage (scorePlayer, scoreComputer) {
+  let winnerMessage
+  if (scorePlayer > scoreComputer) {
+    winnerMessage = `Great ! you won this game ${scorePlayer} - ${scoreComputer}`
+  } else if (scorePlayer < scoreComputer) {
+    winnerMessage = `Sad, you loose this game  ${scorePlayer} - ${scoreComputer}`
+  } else {
+    winnerMessage = `It's a tie game  ${scorePlayer} - ${scoreComputer}`
+  }
+  return winnerMessage
+}
+
 function game () {
   let scorePlayer = 0
   let scoreComputer = 0
@@ -38,24 +50,17 @@ function game () {
     const computerSelection = computerPlay()
     const playerSelection = prompt('Choose Rock, Papers, Scissors ?', '')
     console.log(`round ${index}`)
-    const result = playRound(playerSelection, computerSelection)
-    console.log(result)
-    if (result.includes('win')) {
+    const resultRound = playRound(playerSelection, computerSelection)
+    console.log(resultRound)
+    if (resultRound.includes('win')) {
       scorePlayer++
-    } else if (result.includes('loose')) {
+    } else if (resultRound.includes('loose')) {
       scoreComputer++
     }
   }
 
-  let result
-  if (scorePlayer > scoreComputer) {
-    result = `Great ! you won this game ${scorePlayer} - ${scoreComputer}`
-  } else if (scorePlayer < scoreComputer) {
-    result = `Sad, you loose this game  ${scorePlayer} - ${scoreComputer}`
-  } else {
-    result = `It's a tie game  ${scorePlayer} - ${scoreComputer}`
-  }
-  return result
+  const resultGame = displayWinnerMessage(scorePlayer, scoreComputer)
+  return resultGame
 }
 
 console.log(game())
