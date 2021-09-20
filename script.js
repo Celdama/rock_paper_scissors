@@ -1,45 +1,54 @@
-function computerPlay() {
-  const choice = ["Rock", "Paper", "Scissors"];
-  let index = Math.floor(Math.random() * choice.length);
-
-  return choice[index];
+function computerPlay () {
+  const choice = ['Rock', 'Papers', 'Scissors']
+  const index = Math.floor(Math.random() * choice.length)
+  return choice[index]
 }
 
-function playRound(playerSelection, computerSelection) {
-  let lowerPlayerSelection = playerSelection.toLowerCase();
-  let lowerComputerSelection = computerSelection.toLowerCase();
+function playRound (playerSelection, computerSelection) {
+  const lowerPlayerSelection = playerSelection.toLowerCase()
+  const lowerComputerSelection = computerSelection.toLowerCase()
+  let result = ''
 
   if (lowerPlayerSelection === lowerComputerSelection) {
     return "It's a tied"
   }
 
-  if (lowerPlayerSelection === 'rock') {
-    if (lowerComputerSelection === 'scissors') {
-      return "You win ! Rock beats Scissors";
-    } else {
-      return "You loose ! Papers beats Rock"
-    }
+  switch (lowerPlayerSelection) {
+    case 'rock':
+      lowerComputerSelection === 'scissors' ? result = 'You win ! Rock beats Scissors' : result = 'You loose ! Papers beats Rock'
+      break
+    case 'papers':
+      lowerComputerSelection === 'rock' ? result = 'You win ! Papers beats Rock' : result = 'You loose ! Scissors beats Papers'
+      break
+    case 'scissors':
+      lowerComputerSelection === 'papers' ? result = 'You win ! Scissors beats Papers' : result = 'You loose ! Rocks beats Scissors'
+      break
+    default:
+      result = ''
+      break
   }
 
-  if (lowerPlayerSelection === 'papers') {
-    if (lowerComputerSelection === 'rock') {
-      return "You win ! Papers beats Rock";
-    } else {
-      return "You loose ! Scissors beats Papers"
-    }
-  }
-
-  if (lowerPlayerSelection === 'scissors') {
-    if (lowerComputerSelection === 'papers') {
-      return "You win ! Scissors beats papers";
-    } else {
-      return "You loose ! Rocks beats Scissors"
-    }
-  }
+  return result
 }
 
-const playerSelection = "rock"
-const computerSelection = computerPlay();
-console.log(computerSelection)
+function game () {
+  let scorePlayer = 0
+  let scoreComputer = 0
+  for (let index = 0; index < 5; index++) {
+    const computerSelection = computerPlay()
+    const playerSelection = prompt('Choose Rock, Papers, Scissors ?', '')
+    console.log(`round ${index}`)
+    const result = playRound(playerSelection, computerSelection)
+    console.log(result)
+    if (result.includes('win')) {
+      scorePlayer++
+    } else if (result.includes('loose')) {
+      scoreComputer++
+    }
+  }
 
-console.log(playRound(playerSelection, computerSelection))
+  const result = scorePlayer > scoreComputer ? 'Great ! you win this game' : 'Sad, you loose'
+  return result
+}
+
+console.log(game())
