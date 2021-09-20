@@ -46,10 +46,10 @@ function displayWinnerMessage (scorePlayer, scoreComputer) {
 function game () {
   let scorePlayer = 0
   let scoreComputer = 0
-  for (let index = 0; index < 5; index++) {
+  for (let i = 0; i < 5; i++) {
     const computerSelection = computerPlay()
     const playerSelection = prompt('Choose Rock, Papers, Scissors ?', '')
-    console.log(`round ${index}`)
+    console.log(`round ${i}`)
     const resultRound = playRound(playerSelection, computerSelection)
     console.log(resultRound)
     if (resultRound.includes('win')) {
