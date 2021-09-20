@@ -10,7 +10,7 @@ function playRound (playerSelection, computerSelection) {
   let result = ''
 
   if (lowerPlayerSelection === lowerComputerSelection) {
-    return "It's a tied"
+    return "It's a tie"
   }
 
   switch (lowerPlayerSelection) {
@@ -47,7 +47,14 @@ function game () {
     }
   }
 
-  const result = scorePlayer > scoreComputer ? 'Great ! you win this game' : 'Sad, you loose'
+  let result
+  if (scorePlayer > scoreComputer) {
+    result = `Great ! you won this game ${scorePlayer} - ${scoreComputer}`
+  } else if (scorePlayer < scoreComputer) {
+    result = `Sad, you loose this game  ${scorePlayer} - ${scoreComputer}`
+  } else {
+    result = `It's a tie game  ${scorePlayer} - ${scoreComputer}`
+  }
   return result
 }
 
