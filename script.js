@@ -1,99 +1,99 @@
-const buttons = Array.from(document.querySelectorAll('.game-btn'))
-const displayResult = document.querySelector('#result')
-const displayScore = document.querySelector('#score')
-const resetBtn = document.querySelector('#reset')
+const buttons = Array.from(document.querySelectorAll('.game-btn'));
+const displayResult = document.querySelector('#result');
+const displayScore = document.querySelector('#score');
+const resetBtn = document.querySelector('#reset');
 
-let scorePlayer = 0
-let scoreComputer = 0
-resetBtn.disabled = true
-displayResult.textContent = 'Start the game'
-displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`
+let scorePlayer = 0;
+let scoreComputer = 0;
+resetBtn.disabled = true;
+displayResult.textContent = 'Start the game';
+displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => launchGame(button.id))
-})
-
-function launchGame (playerSelection) {
-  const computerSelection = computerPlay()
-  const resultRound = playRound(playerSelection, computerSelection)
-  game(resultRound)
+function computerPlay() {
+  const choice = ['rock', 'papers', 'scissors'];
+  const index = Math.floor(Math.random() * choice.length);
+  return choice[index];
 }
 
-function computerPlay () {
-  const choice = ['rock', 'papers', 'scissors']
-  const index = Math.floor(Math.random() * choice.length)
-  return choice[index]
-}
-
-function playRound (playerSelection, computerSelection) {
-  let result = ''
-  console.log(playerSelection, computerSelection)
+function playRound(playerSelection, computerSelection) {
+  let result = '';
+  console.log(playerSelection, computerSelection);
 
   if (playerSelection === computerSelection) {
-    result = 'Tie game'
-    displayResult.textContent = result
-    return result
+    result = 'Tie game';
+    displayResult.textContent = result;
+    return result;
   }
 
   switch (playerSelection) {
     case 'rock':
-      computerSelection === 'scissors' ? result = 'You win ! Rock beats Scissors' : result = 'You loose ! Papers beats Rock'
-      break
+      computerSelection === 'scissors' ? result = 'You win ! Rock beats Scissors' : result = 'You loose ! Papers beats Rock';
+      break;
     case 'papers':
-      computerSelection === 'rock' ? result = 'You win ! Papers beats Rock' : result = 'You loose ! Scissors beats Papers'
-      break
+      computerSelection === 'rock' ? result = 'You win ! Papers beats Rock' : result = 'You loose ! Scissors beats Papers';
+      break;
     case 'scissors':
-      computerSelection === 'papers' ? result = 'You win ! Scissors beats Papers' : result = 'You loose ! Rocks beats Scissors'
-      break
+      computerSelection === 'papers' ? result = 'You win ! Scissors beats Papers' : result = 'You loose ! Rocks beats Scissors';
+      break;
     default:
-      result = ''
-      break
+      result = '';
+      break;
   }
 
-  displayResult.textContent = result
-  return result
+  displayResult.textContent = result;
+  return result;
 }
 
-function game (result) {
+function playAgain() {
+  scorePlayer = 0;
+  scoreComputer = 0;
+  resetBtn.disabled = true;
+  displayResult.textContent = "Let's go revenge";
+  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`;
+  buttons.forEach((button) => {
+    button.disabled = false;
+  });
+}
+
+function endGame() {
+  buttons.forEach((button) => {
+    button.disabled = true;
+  });
+  resetBtn.disabled = false;
+  resetBtn.addEventListener('click', () => playAgain());
+}
+
+function displayWinnerMessage(playerPoint, computerPoint) {
+  let winnerMessage;
+
+  playerPoint > computerPoint
+    ? winnerMessage = `Great ! you won ${scorePlayer} - ${scoreComputer}`
+    : winnerMessage = `Sad, you loose ${scorePlayer} - ${scoreComputer}`;
+
+  displayResult.textContent = winnerMessage;
+}
+
+function game(result) {
   if (result.includes('win')) {
-    scorePlayer += 1
+    scorePlayer += 1;
   } else if (result.includes('loose')) {
-    scoreComputer += 1
+    scoreComputer += 1;
   }
 
-  displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`
+  displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
 
   if (scorePlayer === 5 || scoreComputer === 5) {
-    endGame()
-    displayWinnerMessage(scorePlayer, scoreComputer)
+    endGame();
+    displayWinnerMessage(scorePlayer, scoreComputer);
   }
 }
 
-function displayWinnerMessage (scorePlayer, scoreComputer) {
-  let winnerMessage
-
-  scorePlayer > scoreComputer
-    ? winnerMessage = `Great ! you won ${scorePlayer} - ${scoreComputer}`
-    : winnerMessage = `Sad, you loose ${scorePlayer} - ${scoreComputer}`
-
-  displayResult.textContent = winnerMessage
+function launchGame(playerSelection) {
+  const computerSelection = computerPlay();
+  const resultRound = playRound(playerSelection, computerSelection);
+  game(resultRound);
 }
 
-function endGame () {
-  buttons.forEach(button => {
-    button.disabled = true
-  })
-  resetBtn.disabled = false
-  resetBtn.addEventListener('click', () => playAgain())
-}
-
-function playAgain () {
-  scorePlayer = 0
-  scoreComputer = 0
-  resetBtn.disabled = true
-  displayResult.textContent = 'Let\'s go revenge'
-  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
-  buttons.forEach(button => {
-    button.disabled = false
-  })
-}
+buttons.forEach((button) => {
+  button.addEventListener('click', () => launchGame(button.id));
+});
