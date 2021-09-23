@@ -1,27 +1,64 @@
+const buttons = document.querySelectorAll('.game-btn')
+const displayResult = document.querySelector('#result')
+const displayScore = document.querySelector('#score')
+const resetBtn = document.querySelector('#play')
+
+console.log(buttons)
+
+let scorePlayer = 0
+let scoreComputer = 0
+resetBtn.disabled = true
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const result = playRound(button.id, computerPlay())
+    displayResult.textContent = result
+    game(result)
+  })
+})
+
+function endGame () {
+  buttons.forEach(button => {
+    button.disabled = true
+  })
+  resetBtn.disabled = false
+  resetBtn.addEventListener('click', () => playAgain())
+}
+
+function playAgain () {
+  console.log('play again bro')
+  scorePlayer = 0
+  scoreComputer = 0
+  resetBtn.disabled = true
+  displayResult.textContent = ''
+  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
+  buttons.forEach(button => {
+    button.disabled = false
+  })
+}
+
 function computerPlay () {
-  const choice = ['Rock', 'Papers', 'Scissors']
+  const choice = ['rock', 'papers', 'scissors']
   const index = Math.floor(Math.random() * choice.length)
   return choice[index]
 }
 
 function playRound (playerSelection, computerSelection) {
-  const lowerPlayerSelection = playerSelection.toLowerCase()
-  const lowerComputerSelection = computerSelection.toLowerCase()
   let result = ''
 
-  if (lowerPlayerSelection === lowerComputerSelection) {
+  if (playerSelection === computerSelection) {
     return "It's a tie"
   }
 
-  switch (lowerPlayerSelection) {
+  switch (playerSelection) {
     case 'rock':
-      lowerComputerSelection === 'scissors' ? result = 'You win ! Rock beats Scissors' : result = 'You loose ! Papers beats Rock'
+      computerSelection === 'scissors' ? result = 'You win ! Rock beats Scissors' : result = 'You loose ! Papers beats Rock'
       break
     case 'papers':
-      lowerComputerSelection === 'rock' ? result = 'You win ! Papers beats Rock' : result = 'You loose ! Scissors beats Papers'
+      computerSelection === 'rock' ? result = 'You win ! Papers beats Rock' : result = 'You loose ! Scissors beats Papers'
       break
     case 'scissors':
-      lowerComputerSelection === 'papers' ? result = 'You win ! Scissors beats Papers' : result = 'You loose ! Rocks beats Scissors'
+      computerSelection === 'papers' ? result = 'You win ! Scissors beats Papers' : result = 'You loose ! Rocks beats Scissors'
       break
     default:
       result = ''
@@ -40,27 +77,22 @@ function displayWinnerMessage (scorePlayer, scoreComputer) {
   } else {
     winnerMessage = `It's a tie game  ${scorePlayer} - ${scoreComputer}`
   }
-  return winnerMessage
+  displayResult.textContent = winnerMessage
 }
 
-function game () {
-  let scorePlayer = 0
-  let scoreComputer = 0
-  for (let i = 0; i < 5; i++) {
-    const computerSelection = computerPlay()
-    const playerSelection = prompt('Choose Rock, Papers, Scissors ?', '')
-    console.log(`round ${i}`)
-    const resultRound = playRound(playerSelection, computerSelection)
-    console.log(resultRound)
-    if (resultRound.includes('win')) {
-      scorePlayer++
-    } else if (resultRound.includes('loose')) {
-      scoreComputer++
-    }
+function game (result) {
+  if (result.includes('win')) {
+    scorePlayer += 1
+  } else if (result.includes('loose')) {
+    scoreComputer += 1
   }
 
-  const resultGame = displayWinnerMessage(scorePlayer, scoreComputer)
-  return resultGame
-}
+  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
 
-console.log(game())
+  if (scorePlayer === 5 || scoreComputer === 5) {
+    console.log('ennnnnnnd')
+    // play = false
+    endGame()
+    displayWinnerMessage(scorePlayer, scoreComputer)
+  }
+}
