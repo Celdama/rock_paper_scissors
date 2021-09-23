@@ -1,40 +1,22 @@
-const buttons = document.querySelectorAll('.game-btn')
+const buttons = Array.from(document.querySelectorAll('.game-btn'))
 const displayResult = document.querySelector('#result')
 const displayScore = document.querySelector('#score')
-const resetBtn = document.querySelector('#play')
-
-console.log(buttons)
+const resetBtn = document.querySelector('#reset')
 
 let scorePlayer = 0
 let scoreComputer = 0
 resetBtn.disabled = true
+displayResult.textContent = 'Start the game'
+displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`
 
 buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const result = playRound(button.id, computerPlay())
-    displayResult.textContent = result
-    game(result)
-  })
+  button.addEventListener('click', () => launchGame(button.id))
 })
 
-function endGame () {
-  buttons.forEach(button => {
-    button.disabled = true
-  })
-  resetBtn.disabled = false
-  resetBtn.addEventListener('click', () => playAgain())
-}
-
-function playAgain () {
-  console.log('play again bro')
-  scorePlayer = 0
-  scoreComputer = 0
-  resetBtn.disabled = true
-  displayResult.textContent = ''
-  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
-  buttons.forEach(button => {
-    button.disabled = false
-  })
+function launchGame (playerSelection) {
+  const computerSelection = computerPlay()
+  const resultRound = playRound(playerSelection, computerSelection)
+  game(resultRound)
 }
 
 function computerPlay () {
@@ -45,9 +27,12 @@ function computerPlay () {
 
 function playRound (playerSelection, computerSelection) {
   let result = ''
+  console.log(playerSelection, computerSelection)
 
   if (playerSelection === computerSelection) {
-    return "It's a tie"
+    result = 'Tie game'
+    displayResult.textContent = result
+    return result
   }
 
   switch (playerSelection) {
@@ -65,19 +50,8 @@ function playRound (playerSelection, computerSelection) {
       break
   }
 
+  displayResult.textContent = result
   return result
-}
-
-function displayWinnerMessage (scorePlayer, scoreComputer) {
-  let winnerMessage
-  if (scorePlayer > scoreComputer) {
-    winnerMessage = `Great ! you won this game ${scorePlayer} - ${scoreComputer}`
-  } else if (scorePlayer < scoreComputer) {
-    winnerMessage = `Sad, you loose this game  ${scorePlayer} - ${scoreComputer}`
-  } else {
-    winnerMessage = `It's a tie game  ${scorePlayer} - ${scoreComputer}`
-  }
-  displayResult.textContent = winnerMessage
 }
 
 function game (result) {
@@ -87,12 +61,39 @@ function game (result) {
     scoreComputer += 1
   }
 
-  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
+  displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`
 
   if (scorePlayer === 5 || scoreComputer === 5) {
-    console.log('ennnnnnnd')
-    // play = false
     endGame()
     displayWinnerMessage(scorePlayer, scoreComputer)
   }
+}
+
+function displayWinnerMessage (scorePlayer, scoreComputer) {
+  let winnerMessage
+
+  scorePlayer > scoreComputer
+    ? winnerMessage = `Great ! you won ${scorePlayer} - ${scoreComputer}`
+    : winnerMessage = `Sad, you loose ${scorePlayer} - ${scoreComputer}`
+
+  displayResult.textContent = winnerMessage
+}
+
+function endGame () {
+  buttons.forEach(button => {
+    button.disabled = true
+  })
+  resetBtn.disabled = false
+  resetBtn.addEventListener('click', () => playAgain())
+}
+
+function playAgain () {
+  scorePlayer = 0
+  scoreComputer = 0
+  resetBtn.disabled = true
+  displayResult.textContent = 'Let\'s go revenge'
+  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`
+  buttons.forEach(button => {
+    button.disabled = false
+  })
 }
