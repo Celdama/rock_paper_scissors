@@ -5,19 +5,17 @@ const resetBtn = document.querySelector('#reset');
 
 let scorePlayer = 0;
 let scoreComputer = 0;
-resetBtn.disabled = true;
 displayResult.textContent = 'Start the game';
 displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
 
-function computerPlay() {
+const computerPlay = () => {
   const choice = ['rock', 'papers', 'scissors'];
   const index = Math.floor(Math.random() * choice.length);
   return choice[index];
-}
+};
 
-function playRound(playerSelection, computerSelection) {
+const playRound = (playerSelection, computerSelection) => {
   let result = '';
-  console.log(playerSelection, computerSelection);
 
   if (playerSelection === computerSelection) {
     result = 'Tie game';
@@ -42,9 +40,9 @@ function playRound(playerSelection, computerSelection) {
 
   displayResult.textContent = result;
   return result;
-}
+};
 
-function playAgain() {
+const playAgain = () => {
   scorePlayer = 0;
   scoreComputer = 0;
   resetBtn.disabled = true;
@@ -53,17 +51,17 @@ function playAgain() {
   buttons.forEach((button) => {
     button.disabled = false;
   });
-}
+};
 
-function endGame() {
+const endGame = () => {
   buttons.forEach((button) => {
     button.disabled = true;
   });
   resetBtn.disabled = false;
   resetBtn.addEventListener('click', () => playAgain());
-}
+};
 
-function displayWinnerMessage(playerPoint, computerPoint) {
+const displayWinnerMessage = (playerPoint, computerPoint) => {
   let winnerMessage;
 
   playerPoint > computerPoint
@@ -71,9 +69,9 @@ function displayWinnerMessage(playerPoint, computerPoint) {
     : winnerMessage = `Sad, you loose ${scorePlayer} - ${scoreComputer}`;
 
   displayResult.textContent = winnerMessage;
-}
+};
 
-function game(result) {
+const game = (result) => {
   if (result.includes('win')) {
     scorePlayer += 1;
   } else if (result.includes('loose')) {
@@ -86,13 +84,13 @@ function game(result) {
     endGame();
     displayWinnerMessage(scorePlayer, scoreComputer);
   }
-}
+};
 
-function launchGame(playerSelection) {
+const launchGame = (playerSelection) => {
   const computerSelection = computerPlay();
   const resultRound = playRound(playerSelection, computerSelection);
   game(resultRound);
-}
+};
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => launchGame(button.id));
