@@ -23,6 +23,14 @@ If you want to test the game you can clone the local repo and run it in your bro
 # cd rock_paper_scissors
 # you can launch a local server or open the index.html file
 ``` 
+## JavaScript Used
+- DOM Manipulation
+- query selector
+- create random index
+- Control Structures
+- function expression
+- addEventListener
+
 ## Next steps
 - add styles 
 - make it responsive
