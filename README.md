@@ -6,6 +6,8 @@ The game is initialized to zero and the game starts when the user clicks on one 
 
 For the moment the UI is put aside, I focused only on the JavaScript part. I plan to come back on this application to improve the UI and make it more attractive. 
 
+![FireShot Capture 053 - Rock Paper Scissors - rock-paper-scissors-rosy vercel app](https://user-images.githubusercontent.com/89074179/135048834-a39a1097-bd12-40e3-8d2c-431cf655a34e.png)
+
 ## Deployed Link
 You can go to this [link](https://rock-paper-scissors-rosy.vercel.app/), to test it online.
 
