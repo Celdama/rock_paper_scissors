@@ -6,7 +6,7 @@
 }
 
 body {
-  border: 2px solid violet;
+  /* border: 2px solid violet; */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -14,34 +14,57 @@ body {
 }
 
 #app {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80%;
+  background-color: #74EBD5;
+  background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
 }
 
 .app-header {
   text-align: center;
   padding: 32px 0;
-  outline: 1px solid blue;
+  /* outline: 1px solid blue; */
 }
 
 .app-main {
-outline: 1px solid green;
+/* outline: 1px solid green; */
+width: 70%;
 display: flex;
 justify-content: space-around;
 align-items: center;
-height: 70%;
+height: 60%;
 }
 
 .app-main .player-choice, .computer-choice {
-  padding: 42px;
+  padding: 22px 42px;
+  text-align: center;
   width: 400px;
   max-width: 420px;
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
+  background: #fff;
+  border-radius: 25px;
+}
+
+.player-choice h3, .computer-choice h3 {
+  padding: 14px 0;
+}
+
+.player-choice div, .computer-choice div {
+  padding: 32px 0;
+}
+
+.player-score, .computer-score {
+  text-align: center;
+  padding: 12px 0;
 }
 
 #result {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 400px;
   text-align: center;
   max-width: 420px;
