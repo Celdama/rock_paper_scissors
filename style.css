@@ -44,6 +44,7 @@ height: 60%;
   padding: 22px 42px;
   text-align: center;
   width: 400px;
+  height: 300px;
   max-width: 420px;
   /* border: 1px solid blue; */
   background: #fff;
@@ -56,6 +57,25 @@ height: 60%;
 
 .player-choice div, .computer-choice div {
   padding: 32px 0;
+  height: 150px;
+}
+
+.player-choice button, .computer-choice button {
+  margin: 10px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all .1s ease-in;
+}
+
+.player-choice button:hover, .computer-choice button:hover {
+  /* outline: 1px solid black; */
+  background-color: #e8e8e4;
+}
+
+.player-choice img, .computer-choice img {
+  height: 62px;
 }
 
 .player-score, .computer-score {
