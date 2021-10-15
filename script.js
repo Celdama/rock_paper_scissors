@@ -8,7 +8,7 @@ const roundTracker = document.querySelector('.round-tracker');
 const playerChoice = document.querySelector('.p-choice');
 const computerChoice = document.querySelector('.c-choice');
 const computerChoiceBtn = document.querySelector('.c-choice-btn');
-const displayComputerChoice = document.querySelector('.display-computer-choice');
+// const displayComputerChoice = document.querySelector('.display-computer-choice');
 
 console.log(displayPlayerScore);
 
@@ -113,15 +113,17 @@ const createComputerChoiceImg = (choice) => {
 };
 
 const launchGame = (playerSelection) => {
+  console.log('here');
   const computerSelection = computerPlay();
   const resultRound = playRound(playerSelection, computerSelection);
   playerChoice.textContent = `Your choice : ${playerSelection}`;
   computerChoice.textContent = `PC selected : ${computerSelection}`;
   computerChoiceBtn.textContent = '';
   computerChoiceBtn.appendChild(createComputerChoiceImg(computerSelection));
-
   game(resultRound);
 };
+
+console.log(buttons);
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => launchGame(button.id));

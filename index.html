@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="./script.js" defer></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div id="app">
       <div class="app-header">
         <h1>Rock Paper Scissors</h1>
-        <p class="round-tracker">Round: 0</p>
+        <p class="round-tracker">Not Round Yet</p>
       </div>
       <div class="app-main">
         <div class="display-player">
@@ -20,13 +20,13 @@
             <h3>Player 1</h3>
             <div>
               <button id="rock" class="game-btn">
-                <img src="./images/rock.png" alt="">
+                <img src="./images/rock.png" alt="" />
               </button>
               <button id="papers" class="game-btn">
-                <img src="./images/papers.png" alt="">
+                <img src="./images/papers.png" alt="" />
               </button>
               <button id="scissors" class="game-btn">
-                <img src="./images/scissors.png" alt="">
+                <img src="./images/scissors.png" alt="" />
               </button>
             </div>
             <p class="p-choice">Your choice :</p>
@@ -48,8 +48,7 @@
         </div>
       </div>
       <div class="app-footer">
-        <!-- <div id="score"></div> -->
-        <button id="reset" disabled>Play again</button>
+        <button id="reset" class="btn-grad" disabled>Play again</button>
       </div>
     </div>
   </body>
