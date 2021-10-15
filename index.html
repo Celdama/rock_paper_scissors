@@ -10,13 +10,35 @@
   </head>
   <body>
     <div id="app">
-      <h1>Rock Paper Scissors</h1>
-      <div id="result"></div>
-      <div id="score"></div>
-      <button id="rock" class="game-btn">Rock</button>
-      <button id="papers" class="game-btn">Papers</button>
-      <button id="scissors" class="game-btn">Scissors</button>
-      <button id="reset" disabled>Play again</button>
+      <div class="app-header">
+        <h1>Rock Paper Scissors</h1>
+        <p class="round-tracker">Round: 0</p>
+      </div>
+      <div class="app-main">
+        <div class="display-player">
+          <div class="player-choice">
+            <h3>Player 1</h3>
+            <button id="rock" class="game-btn">Rock</button>
+            <button id="papers" class="game-btn">Papers</button>
+            <button id="scissors" class="game-btn">Scissors</button>
+            <p>Your choice :</p>
+          </div>
+          <div class="player-score"></div>
+        </div>
+        <div id="result"></div>
+        <div class="display-computer">
+          <div class="computer-choice">
+            <h3>Computer</h3>
+            <button>Rock</button>
+            <p>PC selected:</p>
+          </div>
+          <div class="computer-score"></div>
+        </div>
+      </div>
+      <div class="app-footer">
+        <!-- <div id="score"></div> -->
+        <button id="reset" disabled>Play again</button>
+      </div>
     </div>
   </body>
 </html>

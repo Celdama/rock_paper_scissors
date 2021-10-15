@@ -1,12 +1,18 @@
 const buttons = Array.from(document.querySelectorAll('.game-btn'));
 const displayResult = document.querySelector('#result');
-const displayScore = document.querySelector('#score');
+// const displayScore = document.querySelector('#score');
 const resetBtn = document.querySelector('#reset');
+const displayPlayerScore = document.querySelector('.player-score');
+const displayComputerScore = document.querySelector('.computer-score');
+const roundTracker = document.querySelector('.round-tracker');
+
+console.log(displayPlayerScore);
 
 let scorePlayer = 0;
 let scoreComputer = 0;
-displayResult.textContent = 'Start the game';
-displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
+let round = 0;
+displayResult.textContent = 'VS';
+// displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
 
 const computerPlay = () => {
   const choice = ['rock', 'papers', 'scissors'];
@@ -45,9 +51,13 @@ const playRound = (playerSelection, computerSelection) => {
 const playAgain = () => {
   scorePlayer = 0;
   scoreComputer = 0;
+  round = 0;
   resetBtn.disabled = true;
   displayResult.textContent = "Let's go revenge";
-  displayScore.textContent = `${scorePlayer} - ${scoreComputer}`;
+  displayPlayerScore.textContent = scorePlayer;
+  displayComputerScore.textContent = scoreComputer;
+  // displayScore.textContent = `${scorePlayer} - ${scoreComputer}`;
+  roundTracker.textContent = `Round: ${round}`;
   buttons.forEach((button) => {
     button.disabled = false;
   });
@@ -78,7 +88,12 @@ const game = (result) => {
     scoreComputer += 1;
   }
 
-  displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
+  round += 1;
+
+  // displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
+  displayPlayerScore.textContent = scorePlayer;
+  displayComputerScore.textContent = scoreComputer;
+  roundTracker.textContent = `Round: ${round}`;
 
   if (scorePlayer === 5 || scoreComputer === 5) {
     endGame();

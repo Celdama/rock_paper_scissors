@@ -5,6 +5,54 @@
   font-family: sans-serif;
 }
 
+body {
+  border: 2px solid violet;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  border: 1px solid red;
+  height: 80%;
+  width: 80%;
+}
+
+.app-header {
+  text-align: center;
+  padding: 32px 0;
+  outline: 1px solid blue;
+}
+
+.app-main {
+outline: 1px solid green;
+display: flex;
+justify-content: space-around;
+align-items: center;
+height: 70%;
+}
+
+.app-main .player-choice, .computer-choice {
+  padding: 42px;
+  width: 400px;
+  max-width: 420px;
+  border: 1px solid blue;
+}
+
+#result {
+  border: 1px solid red;
+  width: 400px;
+  text-align: center;
+  max-width: 420px;
+}
+
+.app-footer {
+  text-align: center;
+}
+
+
+
 button {
   padding: 8px;
 }
