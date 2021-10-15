@@ -5,6 +5,9 @@ const resetBtn = document.querySelector('#reset');
 const displayPlayerScore = document.querySelector('.player-score');
 const displayComputerScore = document.querySelector('.computer-score');
 const roundTracker = document.querySelector('.round-tracker');
+const playerChoice = document.querySelector('.p-choice');
+const computerChoice = document.querySelector('.c-choice');
+const computerChoiceBtn = document.querySelector('.c-choice-btn');
 
 console.log(displayPlayerScore);
 
@@ -55,6 +58,7 @@ const playAgain = () => {
   resetBtn.disabled = true;
   displayResult.textContent = "Let's go revenge";
   displayPlayerScore.textContent = scorePlayer;
+  displayComputerScore.textContent = scoreComputer; displayPlayerScore.textContent = scorePlayer;
   displayComputerScore.textContent = scoreComputer;
   // displayScore.textContent = `${scorePlayer} - ${scoreComputer}`;
   roundTracker.textContent = `Round: ${round}`;
@@ -90,7 +94,6 @@ const game = (result) => {
 
   round += 1;
 
-  // displayScore.textContent = `You ${scorePlayer} - ${scoreComputer} RPS King`;
   displayPlayerScore.textContent = scorePlayer;
   displayComputerScore.textContent = scoreComputer;
   roundTracker.textContent = `Round: ${round}`;
@@ -104,6 +107,9 @@ const game = (result) => {
 const launchGame = (playerSelection) => {
   const computerSelection = computerPlay();
   const resultRound = playRound(playerSelection, computerSelection);
+  playerChoice.textContent = `Your choice : ${playerSelection}`;
+  computerChoice.textContent = `PC selected : ${computerSelection}`;
+  computerChoiceBtn.textContent = computerSelection;
   game(resultRound);
 };
 
